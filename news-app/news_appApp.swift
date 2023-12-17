@@ -15,3 +15,4 @@ struct news_appApp: App {
         }
     }
 }
+

@@ -29,6 +29,7 @@ struct VerificationView: View {
     }
 }
 
+
 extension VerificationView{
     func header() -> some View {
         VStack (alignment: .leading, spacing: 8) {

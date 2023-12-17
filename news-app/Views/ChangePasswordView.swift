@@ -18,3 +18,4 @@ struct ChangePasswordView_Previews: PreviewProvider {
         ChangePasswordView()
     }
 }
+

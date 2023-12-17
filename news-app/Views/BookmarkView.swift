@@ -18,3 +18,4 @@ struct BookmarkView_Previews: PreviewProvider {
         BookmarkView()
     }
 }
+

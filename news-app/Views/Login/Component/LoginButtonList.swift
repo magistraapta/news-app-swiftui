@@ -69,6 +69,7 @@ struct LoginButtonList: View {
     }
 }
 
+
 struct LoginButtonList_Previews: PreviewProvider {
     static var previews: some View {
         LoginButtonList()

@@ -28,6 +28,7 @@ struct NewsSmallCard: View {
     }
 }
 
+
 struct NewsSmallCard_Previews: PreviewProvider {
     static var previews: some View {
         NewsSmallCard()

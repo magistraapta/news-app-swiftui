@@ -28,6 +28,7 @@ struct NewsTag: View {
     }
 }
 
+
 struct NewsTag_Previews: PreviewProvider {
     static var previews: some View {
         NewsTag()

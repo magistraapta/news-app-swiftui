@@ -18,3 +18,4 @@ struct DetailNewsPage_Previews: PreviewProvider {
         DetailNewsPage()
     }
 }
+

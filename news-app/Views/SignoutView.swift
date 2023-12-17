@@ -18,3 +18,4 @@ struct SignoutView_Previews: PreviewProvider {
         SignoutView()
     }
 }
+

@@ -28,6 +28,7 @@ struct UserProfileComponent: View {
     }
 }
 
+
 struct UserProfileComponent_Previews: PreviewProvider {
     static var previews: some View {
         UserProfileComponent()

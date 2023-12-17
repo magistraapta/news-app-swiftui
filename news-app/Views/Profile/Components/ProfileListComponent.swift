@@ -24,6 +24,7 @@ struct ProfileListComponent: View {
     }
 }
 
+
 struct ProfileListComponent_Previews: PreviewProvider {
     static var previews: some View {
         ProfileListComponent(name: "Notification")

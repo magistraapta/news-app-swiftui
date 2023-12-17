@@ -30,6 +30,7 @@ struct NewsBigCard: View {
     }
 }
 
+
 struct NewsBigCard_Previews: PreviewProvider {
     static var previews: some View {
         NewsBigCard()

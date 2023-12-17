@@ -18,3 +18,4 @@ struct NotificationView_Previews: PreviewProvider {
         NotificationView()
     }
 }
+
