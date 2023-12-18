@@ -32,8 +32,6 @@ struct ProfileView: View {
                     } label: {
                         ProfileListComponent(name: item)
                     }
-
-                    
                 }
             }
             Spacer()

@@ -22,11 +22,12 @@ struct MainView: View {
                 .tabItem {
                     Image(systemName: "magnifyingglass")
                 }
-            VerificationView()
+            BookmarkView()
                 .tabItem {
                     Image(systemName: "bookmark")
                 }
         }
+        .navigationBarBackButtonHidden(true)
     }
 }
 

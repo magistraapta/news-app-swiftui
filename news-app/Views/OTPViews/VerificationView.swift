@@ -25,6 +25,7 @@ struct VerificationView: View {
 
             }
         }
+        .navigationBarBackButtonHidden(true)
         .padding(.horizontal,20)
     }
 }

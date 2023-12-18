@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3E54D5DD2B300C8300027155 /* NewsDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E54D5DC2B300C8300027155 /* NewsDetailView.swift */; };
+		3E54D5DF2B300D0E00027155 /* news-header.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E54D5DE2B300D0E00027155 /* news-header.png */; };
 		3E5FBF902B2D791A003FE4DA /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E5FBF8F2B2D7919003FE4DA /* OnboardingView.swift */; };
 		3E5FBF942B2D8E10003FE4DA /* test-launch-screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3E5FBF932B2D8E10003FE4DA /* test-launch-screen.storyboard */; };
 		3E5FBF982B2F173B003FE4DA /* UserProfileComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E5FBF972B2F173B003FE4DA /* UserProfileComponent.swift */; };
@@ -15,7 +17,6 @@
 		3E5FBF9E2B2F1CCB003FE4DA /* SignoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E5FBF9D2B2F1CCB003FE4DA /* SignoutView.swift */; };
 		3E5FBFA02B2F1EBA003FE4DA /* ChangePasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E5FBF9F2B2F1EBA003FE4DA /* ChangePasswordView.swift */; };
 		3E5FBFA32B2F1FF1003FE4DA /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E5FBFA22B2F1FF1003FE4DA /* LoginView.swift */; };
-		3E5FBFA82B2F277A003FE4DA /* LoginButtonList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E5FBFA72B2F277A003FE4DA /* LoginButtonList.swift */; };
 		3E78529E2B2B497C00E4E935 /* news_appApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E78529D2B2B497C00E4E935 /* news_appApp.swift */; };
 		3E7852A02B2B497C00E4E935 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E78529F2B2B497C00E4E935 /* ContentView.swift */; };
 		3E7852A22B2B497D00E4E935 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3E7852A12B2B497D00E4E935 /* Assets.xcassets */; };
@@ -34,6 +35,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3E54D5DC2B300C8300027155 /* NewsDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsDetailView.swift; sourceTree = "<group>"; };
+		3E54D5DE2B300D0E00027155 /* news-header.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "news-header.png"; sourceTree = "<group>"; };
 		3E5FBF8F2B2D7919003FE4DA /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		3E5FBF932B2D8E10003FE4DA /* test-launch-screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "test-launch-screen.storyboard"; sourceTree = "<group>"; };
 		3E5FBF972B2F173B003FE4DA /* UserProfileComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileComponent.swift; sourceTree = "<group>"; };
@@ -42,7 +45,6 @@
 		3E5FBF9D2B2F1CCB003FE4DA /* SignoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignoutView.swift; sourceTree = "<group>"; };
 		3E5FBF9F2B2F1EBA003FE4DA /* ChangePasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordView.swift; sourceTree = "<group>"; };
 		3E5FBFA22B2F1FF1003FE4DA /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
-		3E5FBFA72B2F277A003FE4DA /* LoginButtonList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginButtonList.swift; sourceTree = "<group>"; };
 		3E78529A2B2B497C00E4E935 /* news-app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "news-app.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E78529D2B2B497C00E4E935 /* news_appApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = news_appApp.swift; sourceTree = "<group>"; };
 		3E78529F2B2B497C00E4E935 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -102,7 +104,6 @@
 		3E5FBFA42B2F1FF4003FE4DA /* Component */ = {
 			isa = PBXGroup;
 			children = (
-				3E5FBFA72B2F277A003FE4DA /* LoginButtonList.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -131,6 +132,7 @@
 				3E7852AB2B2B4F3A00E4E935 /* MainView.swift */,
 				3E78529F2B2B497C00E4E935 /* ContentView.swift */,
 				3E7852A12B2B497D00E4E935 /* Assets.xcassets */,
+				3E54D5DE2B300D0E00027155 /* news-header.png */,
 				3E5FBF932B2D8E10003FE4DA /* test-launch-screen.storyboard */,
 				3E7852A32B2B497D00E4E935 /* Preview Content */,
 			);
@@ -159,6 +161,7 @@
 				3E5FBF9F2B2F1EBA003FE4DA /* ChangePasswordView.swift */,
 				3E5FBF9B2B2F1CC2003FE4DA /* NotificationView.swift */,
 				3E5FBF9D2B2F1CCB003FE4DA /* SignoutView.swift */,
+				3E54D5DC2B300C8300027155 /* NewsDetailView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -258,6 +261,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3E7852A52B2B497D00E4E935 /* Preview Assets.xcassets in Resources */,
+				3E54D5DF2B300D0E00027155 /* news-header.png in Resources */,
 				3E5FBF942B2D8E10003FE4DA /* test-launch-screen.storyboard in Resources */,
 				3E7852A22B2B497D00E4E935 /* Assets.xcassets in Resources */,
 			);
@@ -278,6 +282,7 @@
 				3E5FBF9A2B2F19E0003FE4DA /* ProfileListComponent.swift in Sources */,
 				3E5FBF9C2B2F1CC2003FE4DA /* NotificationView.swift in Sources */,
 				3E7852C42B2CA39500E4E935 /* SwiftUIView.swift in Sources */,
+				3E54D5DD2B300C8300027155 /* NewsDetailView.swift in Sources */,
 				3E7852AF2B2B50EC00E4E935 /* HomeView.swift in Sources */,
 				3E7852B12B2B551700E4E935 /* ProfileView.swift in Sources */,
 				3E5FBF9E2B2F1CCB003FE4DA /* SignoutView.swift in Sources */,
@@ -288,7 +293,6 @@
 				3E7852B52B2B5B2700E4E935 /* ExploreView.swift in Sources */,
 				3E78529E2B2B497C00E4E935 /* news_appApp.swift in Sources */,
 				3E5FBF902B2D791A003FE4DA /* OnboardingView.swift in Sources */,
-				3E5FBFA82B2F277A003FE4DA /* LoginButtonList.swift in Sources */,
 				3E5FBFA32B2F1FF1003FE4DA /* LoginView.swift in Sources */,
 				3E5FBFA02B2F1EBA003FE4DA /* ChangePasswordView.swift in Sources */,
 			);

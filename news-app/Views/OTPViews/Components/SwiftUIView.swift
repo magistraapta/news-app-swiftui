@@ -44,12 +44,23 @@ struct SwiftUIView: View {
                         }
                 }
             }
-            Button {
-                //
+            NavigationLink {
+                MainView()
             } label: {
-                Text("Submit")
+                Text("submit")
+                    .frame(maxWidth: .infinity)
+                    .foregroundColor(.white)
+                    .padding()
+                    .background(Color("purplePrimary"))
+                    .cornerRadius(12)
             }
-            .buttonStyle(BlueButton())
+
+//            Button {
+//
+//            } label: {
+//                Text("Submit")
+//            }
+//            .buttonStyle(BlueButton())
         }
     }
 }

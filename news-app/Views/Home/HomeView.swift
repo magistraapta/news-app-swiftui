@@ -46,7 +46,11 @@ extension HomeView{
         ScrollView(.horizontal) {
             HStack(spacing:16){
                 ForEach(/*@START_MENU_TOKEN@*/0 ..< 5/*@END_MENU_TOKEN@*/) { item in
-                    NewsBigCard()
+                    NavigationLink {
+                        NewsDetailView()
+                    } label: {
+                        NewsBigCard()
+                    }
                 }
             }
         }
@@ -69,7 +73,11 @@ extension HomeView {
                     .foregroundColor(Color("grayPrimary"))
             }
             ForEach(/*@START_MENU_TOKEN@*/0 ..< 5/*@END_MENU_TOKEN@*/) { item in
-                NewsSmallCard()
+                NavigationLink {
+                    NewsDetailView()
+                } label: {
+                    NewsSmallCard()
+                }
             }
         }
     }
