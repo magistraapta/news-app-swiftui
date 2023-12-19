@@ -11,9 +11,6 @@ struct ProfileView: View {
     let listName = ["Notification", "Change Password", "Sign Out"]
     var body: some View {
         VStack(alignment: .leading,spacing: 32){
-            Text("Profile")
-                .bold()
-                .font(.system(size: 32))
             UserProfileComponent()
             VStack(spacing: 16){
                 ForEach(listName, id:\.self) { item in
@@ -37,6 +34,8 @@ struct ProfileView: View {
             Spacer()
         }
         .padding(.horizontal,20)
+        .navigationTitle("Profile")
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 
