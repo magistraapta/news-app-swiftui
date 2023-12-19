@@ -8,16 +8,29 @@
 import SwiftUI
 
 struct NewsBigCard: View {
+    @State var title: String
+    @State var desc: String
+    @State var thumbnail: String
     var body: some View {
         ZStack(alignment:.bottomLeading){
-            Image("news-1")
-                .resizable()
-                .scaledToFill()
+            AsyncImage(url: URL(string: thumbnail)) { image in
+                image
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 256)
+                    .cornerRadius(12)
+                    .overlay{
+                        Rectangle()
+                            .foregroundColor(Color.black.opacity(0.3))
+                    }
+            } placeholder: {
+                ProgressView()
+            }
             VStack(alignment: .leading,spacing:8){
-                Text("POLITICS")
+                Text(desc)
                     .font(.system(size:12))
                     .foregroundColor(Color("grayLighter"))
-                Text("The latest situation in the presidential election")
+                Text(title)
                     .font(.system(size:16))
                     .bold()
                     .foregroundColor(Color("grayLighter"))
@@ -33,7 +46,7 @@ struct NewsBigCard: View {
 
 struct NewsBigCard_Previews: PreviewProvider {
     static var previews: some View {
-        NewsBigCard()
+        NewsBigCard(title: "SATRIA-1 satellite clears network test, ready for use in 2024", desc: "Tech", thumbnail: "https://img.jakpost.net/c/2023/10/04/2023_10_04_142928_1696393148._thumbnail.jpg")
             .previewLayout(.sizeThatFits)
     }
 }
