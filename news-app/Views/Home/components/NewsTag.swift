@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct NewsTag: View {
-    @State var selectedCategory: String? = nil
-    let category = ["sports", "politics", "gaming", "history"]
+    @State var selectedCategory: String? = "All"
+    let category = ["All", "Politics", "Gaming", "History"]
     var body: some View {
         HStack {
             ForEach(category, id: \.self) { category in
