@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		3E54D5DD2B300C8300027155 /* NewsDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E54D5DC2B300C8300027155 /* NewsDetailView.swift */; };
 		3E54D5DF2B300D0E00027155 /* news-header.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E54D5DE2B300D0E00027155 /* news-header.png */; };
+		3E54D5E12B307EAD00027155 /* CustomSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E54D5E02B307EAD00027155 /* CustomSearchBar.swift */; };
 		3E5FBF902B2D791A003FE4DA /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E5FBF8F2B2D7919003FE4DA /* OnboardingView.swift */; };
 		3E5FBF942B2D8E10003FE4DA /* test-launch-screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3E5FBF932B2D8E10003FE4DA /* test-launch-screen.storyboard */; };
 		3E5FBF982B2F173B003FE4DA /* UserProfileComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E5FBF972B2F173B003FE4DA /* UserProfileComponent.swift */; };
@@ -37,6 +38,7 @@
 /* Begin PBXFileReference section */
 		3E54D5DC2B300C8300027155 /* NewsDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsDetailView.swift; sourceTree = "<group>"; };
 		3E54D5DE2B300D0E00027155 /* news-header.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "news-header.png"; sourceTree = "<group>"; };
+		3E54D5E02B307EAD00027155 /* CustomSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSearchBar.swift; sourceTree = "<group>"; };
 		3E5FBF8F2B2D7919003FE4DA /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		3E5FBF932B2D8E10003FE4DA /* test-launch-screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "test-launch-screen.storyboard"; sourceTree = "<group>"; };
 		3E5FBF972B2F173B003FE4DA /* UserProfileComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileComponent.swift; sourceTree = "<group>"; };
@@ -181,6 +183,7 @@
 				3E7852BB2B2C7F5500E4E935 /* NewsBigCard.swift */,
 				3E7852BD2B2C878E00E4E935 /* NewsSmallCard.swift */,
 				3E7852C52B2D61DE00E4E935 /* NewsTag.swift */,
+				3E54D5E02B307EAD00027155 /* CustomSearchBar.swift */,
 			);
 			path = components;
 			sourceTree = "<group>";
@@ -294,6 +297,7 @@
 				3E78529E2B2B497C00E4E935 /* news_appApp.swift in Sources */,
 				3E5FBF902B2D791A003FE4DA /* OnboardingView.swift in Sources */,
 				3E5FBFA32B2F1FF1003FE4DA /* LoginView.swift in Sources */,
+				3E54D5E12B307EAD00027155 /* CustomSearchBar.swift in Sources */,
 				3E5FBFA02B2F1EBA003FE4DA /* ChangePasswordView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

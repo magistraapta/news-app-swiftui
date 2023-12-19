@@ -11,7 +11,11 @@ struct HomeView: View {
         var body: some View {
         ScrollView {
             VStack (alignment:.leading, spacing: 24){
-                header(title: "Browse", subtitle: "Discover things of this world")
+                VStack {
+                    header(title: "Browse", subtitle: "Discover things of this world")
+                    CustomSearchBar()
+                }
+                
                 newsTagList()
                 newsList()
                 reccomendedList()
