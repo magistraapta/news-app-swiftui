@@ -9,29 +9,35 @@ import SwiftUI
 
 struct HomeView: View {
         var body: some View {
-        ScrollView {
-            VStack (alignment:.leading, spacing: 24){
-                VStack {
-                    HStack {
-                        header(title: "Browse", subtitle: "Discover things of this world")
-                        NavigationLink {
-                            ProfileView()
-                        } label: {
-                            Image("user-profile")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 48)
-                        }
+            VStack {
+                HStack {
+                    header(title: "Browse", subtitle: "Discover things of this world")
+                    NavigationLink {
+                        ProfileView()
+                    } label: {
+                        Image("user-profile")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 48)
                     }
-                    CustomSearchBar()
+                }
+                ScrollView {
+                VStack (alignment:.leading, spacing: 24){
+                    VStack {
+                        
+                        CustomSearchBar()
+                    }
+                    
+                    newsTagList()
+                    HeadlineNews()
+                    ReccomendedNews()
+    //                reccomendedList()
                 }
                 
-                newsTagList()
-                newsList()
-                reccomendedList()
+                }
+                .scrollIndicators(.hidden)
             }
             .padding(.horizontal, 20)
-        }
     }
 }
 
@@ -55,26 +61,33 @@ extension HomeView{
     }
 }
 //newsList
-extension HomeView{
-    func newsList() -> some View {
+
+private struct HeadlineNews: View {
+    @EnvironmentObject var newsVM: NewsViewModel
+    var body: some View {
         ScrollView(.horizontal) {
             HStack(spacing:16){
-                ForEach(/*@START_MENU_TOKEN@*/0 ..< 5/*@END_MENU_TOKEN@*/) { item in
-                    NavigationLink {
-                        NewsDetailView()
-                    } label: {
-                        NewsBigCard()
-                    }
+                ForEach(newsVM.news) { item in
+                    NewsBigCard(title: item.title, desc: item.category, thumbnail: item.image)
                 }
             }
         }
         .scrollIndicators(.hidden)
+        .task {
+            do{
+                try await newsVM.getNewsList()
+            } catch {
+                print(error)
+            }
+        }
 
     }
 }
 //reccomendedList
-extension HomeView {
-    func reccomendedList() -> some View {
+private struct ReccomendedNews: View {
+    @EnvironmentObject var newsVM: NewsViewModel
+
+    var body: some View {
         VStack(alignment: .leading,spacing: 24){
             HStack {
                 Text("Reccomended for you")
@@ -86,14 +99,21 @@ extension HomeView {
                     .font(.system(size: 14))
                     .foregroundColor(Color("grayPrimary"))
             }
-            ForEach(/*@START_MENU_TOKEN@*/0 ..< 5/*@END_MENU_TOKEN@*/) { item in
-                NavigationLink {
-                    NewsDetailView()
-                } label: {
-                    NewsSmallCard()
+            ForEach(newsVM.news) { item in
+                NewsSmallCard(title: item.title, desc: item.category, image: item.image)
+            }
+        }
+        .onAppear{
+            Task{
+                do{
+                    try await newsVM.getNewsList()
+                } catch {
+                    print(error)
                 }
             }
         }
+
+        
     }
 }
 
@@ -111,5 +131,6 @@ extension HomeView{
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
         HomeView()
+            .environmentObject(NewsViewModel())
     }
 }
