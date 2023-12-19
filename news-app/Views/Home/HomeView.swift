@@ -12,7 +12,17 @@ struct HomeView: View {
         ScrollView {
             VStack (alignment:.leading, spacing: 24){
                 VStack {
-                    header(title: "Browse", subtitle: "Discover things of this world")
+                    HStack {
+                        header(title: "Browse", subtitle: "Discover things of this world")
+                        NavigationLink {
+                            ProfileView()
+                        } label: {
+                            Image("user-profile")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 48)
+                        }
+                    }
                     CustomSearchBar()
                 }
                 
