@@ -11,20 +11,33 @@ struct LoginView: View {
     
     var body: some View {
         VStack(spacing: 32){
-            header()
+            LoginHeader()
             
             LoginForm()
             LoginButtonList()
             Spacer()
-            Text("Don't have account? Sign up")
+            
+            HStack{
+                Text("Don't have account?")
+                    .foregroundColor(Color("grayDark"))
+                NavigationLink {
+                    SignupView()
+                } label: {
+                    Text("Sign up")
+                        .underline()
+                        .bold()
+                        .foregroundColor(Color("purplePrimary"))
+                }
+            }
         }
         .padding(.horizontal,20)
+        .navigationBarBackButtonHidden(true)
     }
 }
 
 
-extension LoginView {
-    func header() -> some View {
+private struct LoginHeader: View {
+    var body: some View {
         VStack(alignment:.leading, spacing: 8){
             Text("Welcome Back 👋")
                 .bold()
@@ -34,46 +47,32 @@ extension LoginView {
                 .foregroundColor(Color("grayPrimary"))
             
         }
+
     }
 }
 
+//login form
 private struct LoginForm: View {
     @State var email = ""
+    @State var password = ""
     var body: some View {
-        VStack(alignment: .trailing,spacing: 16){
-            TextField("Email Address", text: $email)
-                .padding()
-                .background(Color("grayLighter"))
-                .cornerRadius(12)
-            SecureField("Password", text: $email)
-                .padding()
-                .background(Color("grayLighter"))
-                .cornerRadius(12)
-            Button {
-                
+        VStack(spacing: 12){
+            InputFieldComponent(placeHolder: "Email", bindingInput: $email, icon: "envelope")
+            InputFieldComponent(placeHolder: "Password", bindingInput: $password, isSecure: true,icon: "lock")
+            NavigationLink {
+                MainView()
             } label: {
-                Text("Forgot Password?")
-                    .foregroundColor(Color("grayPrimary"))
+                Text("Sign in")
             }
+            .buttonStyle(PrimaryButtonComponent())
         }
     }
 }
 
+//login google or facebook
 private struct LoginButtonList: View {
     var body: some View {
         VStack{
-            NavigationLink {
-                VerificationView()
-            } label: {
-                Text("Sign in")
-                    .frame(maxWidth: .infinity)
-                    .padding()
-                    .fontWeight(.semibold)
-                    .foregroundColor(.white)
-                    .background(Color("purplePrimary"))
-                    .cornerRadius(12)
-            }
-
             Spacer()
             Text("or")
             Spacer()
