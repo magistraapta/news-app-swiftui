@@ -23,15 +23,10 @@ struct HomeView: View {
                 }
                 ScrollView {
                 VStack (alignment:.leading, spacing: 24){
-                    VStack {
-                        
-                        CustomSearchBar()
-                    }
-                    
+                    CustomSearchBar()
                     newsTagList()
                     HeadlineNews()
                     ReccomendedNews()
-    //                reccomendedList()
                 }
                 
                 }
@@ -67,7 +62,7 @@ private struct HeadlineNews: View {
     var body: some View {
         ScrollView(.horizontal) {
             HStack(spacing:16){
-                ForEach(newsVM.news) { item in
+                ForEach(newsVM.HeadlineNews) { item in
                     NewsBigCard(title: item.title, desc: item.category, thumbnail: item.image)
                 }
             }
@@ -75,7 +70,7 @@ private struct HeadlineNews: View {
         .scrollIndicators(.hidden)
         .task {
             do{
-                try await newsVM.getNewsList()
+                try await newsVM.getHeadlineNews()
             } catch {
                 print(error)
             }
