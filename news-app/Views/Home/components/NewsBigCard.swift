@@ -24,7 +24,7 @@ struct NewsBigCard: View {
                             .foregroundColor(Color.black.opacity(0.3))
                     }
             } placeholder: {
-                ProgressView()
+                SkeletonComponent(type: .big)
             }
             VStack(alignment: .leading,spacing:8){
                 Text(desc)
@@ -34,7 +34,6 @@ struct NewsBigCard: View {
                     .font(.system(size:16))
                     .bold()
                     .foregroundColor(Color("grayLighter"))
-
             }
             .padding()
         }

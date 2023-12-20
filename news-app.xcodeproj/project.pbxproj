@@ -15,7 +15,7 @@
 		3E54D5ED2B316F5900027155 /* PrimaryButtonComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E54D5EC2B316F5900027155 /* PrimaryButtonComponent.swift */; };
 		3E54D5F02B31747600027155 /* NewsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E54D5EF2B31747600027155 /* NewsModel.swift */; };
 		3E54D5F32B31764200027155 /* NewsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E54D5F22B31764200027155 /* NewsViewModel.swift */; };
-		3E54D5F52B317F6A00027155 /* ProductModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E54D5F42B317F6A00027155 /* ProductModel.swift */; };
+		3E54D5F92B32A81B00027155 /* SkeletonComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E54D5F82B32A81A00027155 /* SkeletonComponent.swift */; };
 		3E5FBF902B2D791A003FE4DA /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E5FBF8F2B2D7919003FE4DA /* OnboardingView.swift */; };
 		3E5FBF942B2D8E10003FE4DA /* test-launch-screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3E5FBF932B2D8E10003FE4DA /* test-launch-screen.storyboard */; };
 		3E5FBF982B2F173B003FE4DA /* UserProfileComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E5FBF972B2F173B003FE4DA /* UserProfileComponent.swift */; };
@@ -50,7 +50,7 @@
 		3E54D5EC2B316F5900027155 /* PrimaryButtonComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryButtonComponent.swift; sourceTree = "<group>"; };
 		3E54D5EF2B31747600027155 /* NewsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsModel.swift; sourceTree = "<group>"; };
 		3E54D5F22B31764200027155 /* NewsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsViewModel.swift; sourceTree = "<group>"; };
-		3E54D5F42B317F6A00027155 /* ProductModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductModel.swift; sourceTree = "<group>"; };
+		3E54D5F82B32A81A00027155 /* SkeletonComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkeletonComponent.swift; sourceTree = "<group>"; };
 		3E5FBF8F2B2D7919003FE4DA /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		3E5FBF932B2D8E10003FE4DA /* test-launch-screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "test-launch-screen.storyboard"; sourceTree = "<group>"; };
 		3E5FBF972B2F173B003FE4DA /* UserProfileComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileComponent.swift; sourceTree = "<group>"; };
@@ -109,6 +109,7 @@
 			children = (
 				3E54D5E82B31625800027155 /* InputFieldComponent.swift */,
 				3E54D5EC2B316F5900027155 /* PrimaryButtonComponent.swift */,
+				3E54D5F82B32A81A00027155 /* SkeletonComponent.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -117,7 +118,6 @@
 			isa = PBXGroup;
 			children = (
 				3E54D5EF2B31747600027155 /* NewsModel.swift */,
-				3E54D5F42B317F6A00027155 /* ProductModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -347,6 +347,7 @@
 				3E54D5DD2B300C8300027155 /* NewsDetailView.swift in Sources */,
 				3E54D5F32B31764200027155 /* NewsViewModel.swift in Sources */,
 				3E7852AF2B2B50EC00E4E935 /* HomeView.swift in Sources */,
+				3E54D5F92B32A81B00027155 /* SkeletonComponent.swift in Sources */,
 				3E7852B12B2B551700E4E935 /* ProfileView.swift in Sources */,
 				3E5FBF9E2B2F1CCB003FE4DA /* SignoutView.swift in Sources */,
 				3E7852AC2B2B4F3A00E4E935 /* MainView.swift in Sources */,
@@ -354,7 +355,6 @@
 				3E7852BC2B2C7F5500E4E935 /* NewsBigCard.swift in Sources */,
 				3E7852BE2B2C878E00E4E935 /* NewsSmallCard.swift in Sources */,
 				3E7852B52B2B5B2700E4E935 /* ExploreView.swift in Sources */,
-				3E54D5F52B317F6A00027155 /* ProductModel.swift in Sources */,
 				3E78529E2B2B497C00E4E935 /* news_appApp.swift in Sources */,
 				3E5FBF902B2D791A003FE4DA /* OnboardingView.swift in Sources */,
 				3E54D5E92B31625800027155 /* InputFieldComponent.swift in Sources */,

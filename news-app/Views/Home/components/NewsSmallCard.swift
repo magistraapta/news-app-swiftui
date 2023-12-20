@@ -20,7 +20,7 @@ struct NewsSmallCard: View {
                     .frame(maxWidth: 96, maxHeight:96)
                     .cornerRadius(12)
             } placeholder: {
-                ProgressView()
+                SkeletonComponent(type: .small)
             }
 
                 
