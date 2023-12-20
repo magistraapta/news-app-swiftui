@@ -32,8 +32,9 @@ class NewsViewModel: ObservableObject {
         self.news = decodedData.posts
     }
     
+    @MainActor
     func getHeadlineNews() async throws {
-        guard let url = URL(string: "https://jakpost.vercel.app/api/category/business/tech") else {
+        guard let url = URL(string: "https://jakpost.vercel.app/api/category/indonesia") else {
             throw URLError(.badURL)
         }
         
@@ -48,6 +49,6 @@ class NewsViewModel: ObservableObject {
         let decoder = JSONDecoder()
         
         let decodedData = try decoder.decode(NewsModel.self, from: data)
-        self.news = decodedData.posts
+        self.HeadlineNews = decodedData.posts
     }
 }
