@@ -14,15 +14,3 @@ This SwiftUI application allows users to browse the latest news with the user-fr
  - [JakPost Endpoint](https://fakestoreapi.com/)
 
 
-
-## Documentation
-
-[Documentation](https://linktodocumentation)
-
-
-## Tech Stack
-
-**Client:** React, Redux, TailwindCSS
-
-**Server:** Node, Express
-
