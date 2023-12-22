@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct HomeView: View {
+    @EnvironmentObject var newsVM: NewsViewModel
         var body: some View {
             VStack {
                 HStack {
@@ -55,22 +56,26 @@ extension HomeView{
         }
     }
 }
-//newsList
 
+//newsList
 private struct HeadlineNews: View {
     @EnvironmentObject var newsVM: NewsViewModel
     var body: some View {
         ScrollView(.horizontal) {
             HStack(spacing:16){
-                ForEach(newsVM.HeadlineNews) { item in
-                    NewsBigCard(title: item.title, desc: item.category, thumbnail: item.image)
+                ForEach(newsVM.news) { item in
+                    NavigationLink {
+                        NewsDetailView(linkUrl: item.link)
+                    } label: {
+                        NewsBigCard(title: item.title, desc: item.category, thumbnail: item.image)
+                    }
                 }
             }
         }
         .scrollIndicators(.hidden)
         .task {
             do{
-                try await newsVM.getHeadlineNews()
+                try await newsVM.getNewsList(filter: .all)
             } catch {
                 print(error)
             }
@@ -78,6 +83,7 @@ private struct HeadlineNews: View {
 
     }
 }
+
 //reccomendedList
 private struct ReccomendedNews: View {
     @EnvironmentObject var newsVM: NewsViewModel
@@ -95,33 +101,44 @@ private struct ReccomendedNews: View {
                     .foregroundColor(Color("grayPrimary"))
             }
             ForEach(newsVM.news) { item in
-                NewsSmallCard(title: item.title, desc: item.category, image: item.image)
+                NavigationLink {
+                    NewsDetailView(linkUrl: item.link)
+                } label: {
+                    NewsSmallCard(title: item.title, desc: item.category, image: item.image)
+                }
             }
+
         }
         .onAppear{
             Task{
                 do{
-                    try await newsVM.getNewsList()
+                    try await newsVM.getNewsList(filter: .all)
                 } catch {
                     print(error)
                 }
+
             }
         }
-
-        
     }
 }
 
-//news tag list
 extension HomeView{
     func newsTagList() -> some View {
         ScrollView(.horizontal) {
-            NewsTag()
+            NewsTag(handler: {f in
+                Task{
+                    do {
+                        try await newsVM.getNewsList(filter: f)
+                    } catch {
+                        print(error)
+                    }
+                }
+            })
         }
         .scrollIndicators(.hidden)
-
     }
 }
+
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {

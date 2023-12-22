@@ -8,35 +8,67 @@
 import SwiftUI
 
 struct NewsDetailView: View {
+    @EnvironmentObject var newsVM: NewsViewModel
+    @State var linkUrl: String
     var body: some View {
-        VStack(spacing:24){
-            NewsHeader()
-            VStack(spacing: 32){
-                AuthorComponent()
-                ContentComponent()
+        ScrollView {
+            if let news = newsVM.detailNews {
+                VStack(spacing:24){
+                    NewsHeader(thumbnail: news.image, title: news.title, location: news.location)
+                    VStack(spacing: 32){
+                        AuthorComponent(author: news.author)
+                        ContentComponent(content: news.postContent)
+                    }
+                    Spacer()
+                }
+                .padding(.horizontal, 20)
+            } else {
+                ProgressView()
+                    .task {
+                        do{
+                            try await newsVM.getDetailNews(url: linkUrl)
+                        } catch {
+                            print(error)
+                        }
+                        
+                    }
             }
-            .padding(.horizontal,20)
+        }
+        .task {
+            do{
+                try await newsVM.getDetailNews(url: linkUrl)
+            } catch {
+                print(error)
+            }
             
-            Spacer()
         }
     }
 }
 
-
-
 private struct NewsHeader: View {
+    @State var thumbnail: String
+    @State var title: String
+    @State var location: String
     var body: some View {
         VStack(alignment:.leading, spacing: 24){
-            Image("news-header")
+            AsyncImage(url: URL(string: thumbnail)) { image in
+                image
+                    .frame(width:350, height: 192)
+                    .cornerRadius(16)
+                    .scaledToFill()
+            } placeholder: {
+                ProgressView()
+            }
+
             VStack (alignment: .leading,spacing: 16){
-                Text("US Selection")
+                Text(location)
                     .padding(.vertical, 8)
                     .padding(.horizontal, 16)
                     .fontWeight(.semibold)
                     .foregroundColor(.white)
                     .background(Color("purplePrimary"))
                 .cornerRadius(16)
-                Text("The latest situation in the presidential election")
+                Text(title)
                     .fontWeight(.bold)
                     .font(.system(size: 20))
                     .foregroundColor(Color("blackPrimary"))
@@ -46,14 +78,12 @@ private struct NewsHeader: View {
 }
 
 private struct AuthorComponent: View {
+    @State var author: String
     var body: some View {
         HStack(spacing: 16){
-            Image("user-profile")
             VStack(alignment: .leading){
-                Text("John Doe")
+                Text(author)
                     .bold()
-                Text("Designer")
-                    .foregroundColor(Color("grayPrimary"))
             }
             Spacer()
                 
@@ -62,7 +92,7 @@ private struct AuthorComponent: View {
 }
 
 private struct ContentComponent: View {
-    let content = "Leads in individual states may change from one party to another as all the votes are counted. Select a state for detailed results, and select the Senate, House or Governor tabs to view those races."
+    @State var content: String
     var body: some View {
         VStack(alignment: .leading, spacing: 8){
             Text("Results")
@@ -75,6 +105,7 @@ private struct ContentComponent: View {
 
 struct NewsDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        NewsDetailView()
+        NewsDetailView(linkUrl: "https://jakpost.vercel.app/api/detailpost/indonesia/2023/12/20/bawaslu-passes-buck-on-campaign-funding-probe")
+            .environmentObject(NewsViewModel())
     }
 }

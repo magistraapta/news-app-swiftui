@@ -30,10 +30,12 @@ struct NewsBigCard: View {
                 Text(desc)
                     .font(.system(size:12))
                     .foregroundColor(Color("grayLighter"))
+                    .multilineTextAlignment(.leading)
                 Text(title)
                     .font(.system(size:16))
                     .bold()
                     .foregroundColor(Color("grayLighter"))
+                    .multilineTextAlignment(.leading)
             }
             .padding()
         }

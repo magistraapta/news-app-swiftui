@@ -22,16 +22,16 @@ struct NewsSmallCard: View {
             } placeholder: {
                 SkeletonComponent(type: .small)
             }
-
-                
             VStack(alignment: .leading, spacing: 8){
                 Text(desc)
                     .font(.system(size:14))
                     .foregroundColor(Color("grayPrimary"))
+                    .multilineTextAlignment(.leading)
                 Text(title)
                     .font(.system(size:16))
                     .foregroundColor(Color("blackPrimary"))
                     .bold()
+                    .multilineTextAlignment(.leading)
 
             }
         }
