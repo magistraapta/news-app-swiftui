@@ -24,7 +24,6 @@ struct HomeView: View {
                 }
                 ScrollView {
                 VStack (alignment:.leading, spacing: 24){
-                    CustomSearchBar()
                     newsTagList()
                     HeadlineNews()
                     ReccomendedNews()
@@ -63,25 +62,41 @@ private struct HeadlineNews: View {
     var body: some View {
         ScrollView(.horizontal) {
             HStack(spacing:16){
-                ForEach(newsVM.news) { item in
-                    NavigationLink {
-                        NewsDetailView(linkUrl: item.link)
-                    } label: {
-                        NewsBigCard(title: item.title, desc: item.category, thumbnail: item.image)
-                    }
+                if newsVM.isLoading {
+                    skeletonView
+                } else {
+                    headlineView
                 }
             }
         }
         .scrollIndicators(.hidden)
         .task {
-            do{
-                try await newsVM.getNewsList(filter: .all)
-            } catch {
-                print(error)
-            }
+            newsVM.getNewsList(filter: .all)
         }
 
     }
+    
+    private var skeletonView: some View {
+        HStack (spacing: 16) {
+            ForEach(0..<3, id:\.self) { _ in
+                SkeletonComponent(skeletonType: .big)
+            }
+        }
+    }
+    
+    private var headlineView: some View {
+        HStack (spacing: 16) {
+            ForEach(newsVM.news) { item in
+                NavigationLink {
+                    NewsDetailView(linkUrl: item.link)
+                } label: {
+                    NewsBigCard(title: item.title, desc: item.category, thumbnail: item.image)
+                }
+            }
+        }
+    }
+    
+    
 }
 
 //reccomendedList
@@ -100,23 +115,35 @@ private struct ReccomendedNews: View {
                     .font(.system(size: 14))
                     .foregroundColor(Color("grayPrimary"))
             }
+            
+            if newsVM.isLoading {
+                skeletonView
+            } else {
+                newsContentView
+            }
+
+        }
+        .onAppear{
+            newsVM.getNewsList(filter: .all)
+        }
+    }
+    
+    private var skeletonView: some View {
+        VStack (spacing: 16) {
+            ForEach(0..<3, id:\.self) { _ in
+                SkeletonComponent(skeletonType: .small)
+            }
+        }
+    }
+    
+    private var newsContentView: some View {
+        VStack (spacing: 16) {
             ForEach(newsVM.news) { item in
                 NavigationLink {
                     NewsDetailView(linkUrl: item.link)
                 } label: {
                     NewsSmallCard(title: item.title, desc: item.category, image: item.image)
                 }
-            }
-
-        }
-        .onAppear{
-            Task{
-                do{
-                    try await newsVM.getNewsList(filter: .all)
-                } catch {
-                    print(error)
-                }
-
             }
         }
     }
@@ -126,13 +153,7 @@ extension HomeView{
     func newsTagList() -> some View {
         ScrollView(.horizontal) {
             NewsTag(handler: {f in
-                Task{
-                    do {
-                        try await newsVM.getNewsList(filter: f)
-                    } catch {
-                        print(error)
-                    }
-                }
+                newsVM.getNewsList(filter: f)
             })
         }
         .scrollIndicators(.hidden)

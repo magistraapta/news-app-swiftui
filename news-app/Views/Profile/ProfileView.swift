@@ -13,22 +13,11 @@ struct ProfileView: View {
         VStack(alignment: .leading,spacing: 32){
             UserProfileComponent()
             VStack(spacing: 16){
-                ForEach(listName, id:\.self) { item in
-                    NavigationLink {
-                        switch item {
-                        case "Notification":
-                            NotificationView()
-                        case "Change Password":
-                            ChangePasswordView()
-                        case "Sign Out":
-                            SignoutView()
-                        
-                        default:
-                            ProfileView()
-                        }
-                    } label: {
-                        ProfileListComponent(name: item)
-                    }
+                NavigationLink {
+                    ProfileView()
+                } label: {
+
+                    Text("Profile")
                 }
             }
             Spacer()
