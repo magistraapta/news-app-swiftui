@@ -24,7 +24,7 @@ struct NewsBigCard: View {
                             .foregroundColor(Color.black.opacity(0.3))
                     }
             } placeholder: {
-                SkeletonComponent(type: .big)
+                SkeletonComponent(skeletonType: .big)
             }
             VStack(alignment: .leading,spacing:8){
                 Text(desc)

@@ -16,11 +16,12 @@ struct NewsSmallCard: View {
             AsyncImage(url: URL(string: image)) { image in
                 image
                     .resizable()
-                
-                    .frame(maxWidth: 96, maxHeight:96)
+                    .scaledToFill()
+                    .frame(maxWidth: 120, maxHeight:96)
                     .cornerRadius(12)
+                    .clipped()
             } placeholder: {
-                SkeletonComponent(type: .small)
+                SkeletonComponent(skeletonType: .small)
             }
             VStack(alignment: .leading, spacing: 8){
                 Text(desc)

@@ -6,6 +6,15 @@
 //
 
 import Foundation
+import Combine
+
+enum ApiError: Error {
+    case invalidURL
+    case networkError(Error)
+    case decodingError(Error)
+    case httpError(Int)
+}
+
 enum Filter: String, CaseIterable{
     case all
     case indonesia
@@ -28,64 +37,175 @@ enum Filter: String, CaseIterable{
     }
 }
 
+protocol NewsServicesProtocol {
+    func fetchNewsList(filter: Filter) async throws -> [Post]
+    func fetchHeadlineNews(filter: Filter) async throws -> [Post]
+    func fetchDetailNews(url: String) async throws -> DetailPost
+}
+
+class NewsServices: NewsServicesProtocol {
+    private let decoder: JSONDecoder
+    private let session: URLSession
+    
+    init(decoder: JSONDecoder = .init(), session: URLSession = .shared) {
+        self.decoder = decoder
+        self.session = session
+    }
+    
+    func fetchNewsList(filter: Filter) async throws -> [Post] {
+        guard let url = filter.getUrl() else {
+            throw ApiError.invalidURL
+        }
+        
+        do{
+            let (data, response) = try await session.data(from: url)
+            
+            guard let httpResponse = response as? HTTPURLResponse else {
+                throw ApiError.networkError(URLError(.badServerResponse))
+            }
+            
+            guard (200...299).contains(httpResponse.statusCode) else {
+                throw ApiError.httpError(httpResponse.statusCode)
+            }
+            
+            let newsModel = try decoder.decode(NewsModel.self, from: data)
+            return newsModel.posts
+        } catch let error {
+            throw mapError(error)
+        }
+    }
+    
+    func fetchHeadlineNews(filter: Filter) async throws -> [Post] {
+        guard let url = filter.getUrl() else {
+            throw ApiError.invalidURL
+        }
+        
+        do {
+            let (data, response) = try await session.data(from: url)
+            
+            guard let httpResponse = response as? HTTPURLResponse else {
+                throw ApiError.networkError(URLError(.badServerResponse))
+            }
+            
+            guard (200...299).contains(httpResponse.statusCode) else {
+                throw ApiError.httpError(httpResponse.statusCode)
+            }
+            
+            let newsModel = try decoder.decode(NewsModel.self, from: data)
+            return newsModel.posts
+        } catch let error {
+            throw mapError(error)
+        }
+    }
+    
+    func fetchDetailNews(url: String) async throws -> DetailPost {
+        guard let url = URL(string: url) else {
+            throw ApiError.invalidURL
+        }
+        
+        do {
+            let (data, response) = try await session.data(from: url)
+            
+            guard let httpResponse = response as? HTTPURLResponse else {
+                throw ApiError.networkError(URLError(.badServerResponse))
+            }
+            
+            guard (200...299).contains(httpResponse.statusCode) else {
+                throw ApiError.httpError(httpResponse.statusCode)
+            }
+            
+            let decodedData = try decoder.decode(Welcome.self, from: data)
+            return decodedData.detailPost
+        } catch {
+            throw mapError(error)
+        }
+    }
+    
+    private func mapError(_ error: Error) -> ApiError {
+        if let decodingError = error as? DecodingError {
+            return .decodingError(decodingError)
+        }
+        
+        if let urlError = error as? URLError {
+            return .networkError(urlError)
+        }
+        
+        return .networkError(error)
+    }
+}
+
 class NewsViewModel: ObservableObject {
     @Published var news: [Post] = []
     @Published var HeadlineNews: [Post] = []
     @Published var detailNews: DetailPost?
+    @Published var isLoading = false
+    @Published var error: ApiError?
     
-    @MainActor
-    func getNewsList(filter: Filter) async throws{
-        guard let url = filter.getUrl() else {
-            throw URLError(.badURL)
-        }
-        
-        let urlRequest = URLRequest(url: url)
-        
-        let (data, response) = try await URLSession.shared.data(for: urlRequest)
-        
-        guard (response as? HTTPURLResponse)?.statusCode == 200 else {
-            throw URLError(.badServerResponse)
-        }
-        
-        let decoder = JSONDecoder()
-        
-        let decodedData = try decoder.decode(NewsModel.self, from: data)
-        self.news = decodedData.posts
+    private let newsService: NewsServicesProtocol
+    private let cancellables = Set<AnyCancellable>()
+    
+    init(newsService: NewsServicesProtocol = NewsServices()) {
+        self.newsService = newsService
     }
     
     @MainActor
-    func getHeadlineNews(filter: Filter) async throws {
-        guard let url = filter.getUrl() else {
-            throw URLError(.badURL)
+    func getNewsList(filter: Filter) {
+        isLoading = true
+        error = nil
+        
+        Task {
+            do {
+                news = try await newsService.fetchNewsList(filter: filter)
+                isLoading = false
+            } catch {
+                handleError(error)
+            }
         }
-        
-        let urlRequest = URLRequest(url: url)
-        
-        let (data, response) = try await URLSession.shared.data(for: urlRequest)
-        
-        guard (response as? HTTPURLResponse)?.statusCode == 200 else {
-            throw URLError(.badServerResponse)
-        }
-        
-        let decoder = JSONDecoder()
-        
-        let decodedData = try decoder.decode(NewsModel.self, from: data)
-        self.HeadlineNews = decodedData.posts
     }
     
-    func getDetailNews(url: String) async throws {
-        guard let urlLink = URL(string: url) else {
-            throw URLError(.badURL)
+    @MainActor
+    func getHeadlineNews(filter: Filter) {
+        isLoading = true
+        error = nil
+        
+        Task {
+            do {
+                news = try await newsService.fetchHeadlineNews(filter: filter)
+                isLoading = false
+            } catch {
+                handleError(error)
+            }
         }
         
-        let urlRequest = URLRequest(url: urlLink)
-        let (data, response) = try await URLSession.shared.data(for: urlRequest)
-        guard (response as? HTTPURLResponse)?.statusCode == 200 else {
-            throw URLError(.badServerResponse)
-        }
-        
-        let decoder = JSONDecoder()
-        let decodedData = try decoder.decode(Welcome.self, from: data)
-        self.detailNews = decodedData.detailPost
     }
+    
+    @MainActor
+    func getDetailNews(url: String) {
+        isLoading = true
+        error = nil
+        
+        Task {
+            do {
+                detailNews = try await newsService.fetchDetailNews(url: url)
+                isLoading = false
+                
+            } catch {
+                handleError(error)
+            }
+        }
+        
+    }
+    
+    private func handleError(_ errorThrown: Error) {
+        isLoading = false
+        
+        if let apiError = errorThrown as? ApiError {
+            error = apiError
+        } else if let urlError = errorThrown as? URLError {
+            error = .networkError(urlError)
+        } else {
+            error = .decodingError(errorThrown)
+        }
+    }
+    
 }

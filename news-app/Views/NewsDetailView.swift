@@ -25,22 +25,12 @@ struct NewsDetailView: View {
             } else {
                 ProgressView()
                     .task {
-                        do{
-                            try await newsVM.getDetailNews(url: linkUrl)
-                        } catch {
-                            print(error)
-                        }
-                        
+                        newsVM.getDetailNews(url: linkUrl)
                     }
             }
         }
         .task {
-            do{
-                try await newsVM.getDetailNews(url: linkUrl)
-            } catch {
-                print(error)
-            }
-            
+            newsVM.getDetailNews(url: linkUrl)
         }
     }
 }
@@ -53,9 +43,14 @@ private struct NewsHeader: View {
         VStack(alignment:.leading, spacing: 24){
             AsyncImage(url: URL(string: thumbnail)) { image in
                 image
-                    .frame(width:350, height: 192)
-                    .cornerRadius(16)
+                    .resizable()
                     .scaledToFill()
+                    .frame(width:350, height: 192)
+                    .clipped()
+                    .frame(maxWidth: .infinity)
+                    .ignoresSafeArea(edges: .top)
+                    .cornerRadius(16)
+                    .clipped()
             } placeholder: {
                 ProgressView()
             }
